@@ -4,7 +4,7 @@ import { ImageLocalizationService } from './image-localization.service';
 
 @Module({
   imports: [
-    ScheduleModule.forRoot(), // enables cron jobs
+    ScheduleModule.forRoot(),
   ],
   providers: [ImageLocalizationService],
 })
