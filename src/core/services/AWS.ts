@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import * as AWS from 'aws-sdk';
 
 AWS.config.update({
