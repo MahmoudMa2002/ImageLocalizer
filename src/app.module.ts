@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ScheduleModule } from '@nestjs/schedule';
-import { ImageLocalizationService } from './image-localization.service';
+import { ImageLocalizationService } from './services/image-localization.service';
 
 @Module({
   imports: [
