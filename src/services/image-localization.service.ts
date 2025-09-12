@@ -40,7 +40,7 @@ export class ImageLocalizationService {
   private async handleImages(name: string, urls: string[], prefix: string) {
     let success = 0;
     let failed = 0;
-
+    
     for (const url of urls) {
       const result = await this.localizeImage(url, prefix);
       if (result) success++;
@@ -52,7 +52,7 @@ export class ImageLocalizationService {
 
   @Cron('*/10 * * * * *') // every 10s
   handleCompanyLogos() {
-    this.logger.debug('Cron=> Localizing company logos....');
+    this.logger.debug('Cron => Localizing company logos....');
     const logos = [
       'https://dummyimage.com/200x200/000/fff.png&text=Company+A',
       'https://dummyimage.com/200x200/111/fff.png&text=Company+B',
@@ -62,7 +62,7 @@ export class ImageLocalizationService {
 
   @Cron('*/15 * * * * *') // every 15s
   handleContactAvatars() {
-    this.logger.debug('Cron=> Localizing contact avatars....')
+    this.logger.debug('Cron => Localizing contact avatars....')
     const avatars = [
       'https://dummyimage.com/100x100/222/fff.png&text=User+1',
       'https://dummyimage.com/100x100/333/fff.png&text=User+2',
