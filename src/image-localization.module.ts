@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/configuration';
-import { ImageLocalizationService } from '../src/services/image-localization.service';
+import { ImageLocalizationService } from './services/image-localization.service'; // Fixed path
 
 @Module({
   imports: [
