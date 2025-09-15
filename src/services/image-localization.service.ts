@@ -4,14 +4,15 @@ import { Cron } from '@nestjs/schedule';
 import { S3 } from 'aws-sdk';
 import axios from 'axios';
 import { v4 as uuid } from 'uuid';
+import { S3Buckets, presignedUrlExpiration } from '../core/config/config';
 
-const S3_BUCKET = 'aladdinb2b-image-localizer-staging';
 const REGION = process.env.AWS_REGION;
 
 @Injectable()
 export class ImageLocalizationService {
   private readonly logger = new Logger(ImageLocalizationService.name);
   private readonly s3 = new S3({ region: REGION });
+  private readonly bucket = S3Buckets.imageLocalizer;
 
   private async localizeImage(url: string, prefix: string): Promise<boolean> {
     try {
@@ -20,11 +21,11 @@ export class ImageLocalizationService {
       const key = `${prefix}/${uuid()}.jpg`;
 
       // Dry run log
-      this.logger.log(`Would upload: s3://${S3_BUCKET}/${key}`);
+      this.logger.log(`Would upload: s3://${this.bucket}/${key}`);
 
       // Uncomment to actually upload
       // await this.s3.putObject({
-      //   Bucket: S3_BUCKET,
+      //   Bucket: this.bucket,
       //   Key: key,
       //   Body: buffer,
       //   ContentType: response.headers['content-type'] || 'image/jpeg',
@@ -40,7 +41,7 @@ export class ImageLocalizationService {
   private async handleImages(name: string, urls: string[], prefix: string) {
     let success = 0;
     let failed = 0;
-    
+
     for (const url of urls) {
       const result = await this.localizeImage(url, prefix);
       if (result) success++;

@@ -4,15 +4,18 @@ export const S3Buckets =
     ? {
         attachment: 'aladdinb2b-attachment-staging',
         brandingImages: 'aladdinb2b-event-branding-staging',
+        imageLocalizer: 'aladdinb2b-image-localizer-staging',
       }
     : process.env.RUNNING_ENVIRONMENT === 'PRODUCTION'
     ? {
         attachment: 'aladdinb2b-attachment-prod',
         brandingImages: 'aladdinb2b-event-branding-prod',
+        imageLocalizer: 'aladdinb2b-image-localizer-prod',
       }
     : {
         attachment: 'aladdinb2b-attachment-staging',
         brandingImages: 'aladdinb2b-event-branding-staging',
+        imageLocalizer: 'aladdinb2b-image-localizer-staging',
       };
 
 export const presignedUrlExpiration = {
