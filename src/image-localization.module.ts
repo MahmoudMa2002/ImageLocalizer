@@ -1,9 +1,9 @@
 // src/image-localization.module.ts
 import { Module } from '@nestjs/common';
 import { ScheduleModule } from '@nestjs/schedule';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
-import { ImageLocalizationService } from './services/image-localization.service'; // Fixed path
+import { ImageLocalizationService } from './services/image-localization.service';
 
 @Module({
   imports: [
@@ -15,4 +15,4 @@ import { ImageLocalizationService } from './services/image-localization.service'
   ],
   providers: [ImageLocalizationService],
 })
-export class ImageLocalizationModule {}
+export class ImageLocalizationModule { }
