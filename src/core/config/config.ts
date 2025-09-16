@@ -23,8 +23,6 @@ export const presignedUrlExpiration = {
   upload: 15 * 60,
 };
 
-export const requiredDirs = [];
-
 export const BASE_URL = process.env.BASE_URL;
 
 export const hexColorRegExp = new RegExp(

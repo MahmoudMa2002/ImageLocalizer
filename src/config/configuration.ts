@@ -1,7 +1,5 @@
 export default () => ({
   port: parseInt(process.env.PORT ?? '3021', 10),
-  rabbitmqUri: process.env.RABBITMQ_URI ?? '',
-  redisUri: process.env.REDIS_URI ?? '',
   mongo: {
     company: process.env.MONGO_URI_COMPANY ?? '',
     event: process.env.MONGO_URI_EVENT ?? '',

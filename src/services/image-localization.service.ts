@@ -58,12 +58,6 @@ export class ImageLocalizationService {
     const totalCompanies = await client.db().collection('companies').countDocuments();
     this.logger.debug(`Total companies in DB: ${totalCompanies}`);
 
-    // Debug: Check companies with any logo/profileImage
-    const companiesWithImages = await client.db().collection('companies').countDocuments({
-      $or: [{ logo: { $exists: true } }, { profileImage: { $exists: true } }]
-    });
-    this.logger.debug(`Companies with logo/profileImage: ${companiesWithImages}`);
-
     // Get companies with external logos updated in last 24h
     const companies = await client.db().collection('companies').find({
       updatedAt: { $gte: new Date(Date.now() - 24 * 60 * 60 * 1000) },
@@ -116,12 +110,6 @@ export class ImageLocalizationService {
     // Debug: Check total contacts
     const totalContacts = await client.db().collection('contacts').countDocuments();
     this.logger.debug(`Total contacts in DB: ${totalContacts}`);
-
-    // Debug: Check contacts with avatars
-    const contactsWithAvatars = await client.db().collection('contacts').countDocuments({
-      avatar: { $exists: true }
-    });
-    this.logger.debug(`Contacts with avatars: ${contactsWithAvatars}`);
 
     // Get contacts with external avatars updated in last 24h
     const contacts = await client.db().collection('contacts').find({
