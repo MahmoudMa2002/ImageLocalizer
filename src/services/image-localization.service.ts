@@ -49,20 +49,20 @@ export class ImageLocalizationService {
     this.logger.log(`[${jobName}] Success: ${success}, Failed: ${failed}`);
   }
 
-  @Cron('*/30 * * * * *') //@Cron('0 0 2 * * *') // Daily at 2 AM
+  @Cron('*/15 * * * * *') //@Cron('0 0 2 * * *') // Daily at 2 AM
   async handleCompanyLogos() {
     const client = new MongoClient(process.env.MONGO_URI_COMPANY || '');
     await client.connect();
 
     // Debug: Check total companies
     const totalCompanies = await client.db().collection('companies').countDocuments();
-    this.logger.log(`Total companies in DB: ${totalCompanies}`);
+    this.logger.debug(`Total companies in DB: ${totalCompanies}`);
 
     // Debug: Check companies with any logo/profileImage
     const companiesWithImages = await client.db().collection('companies').countDocuments({
       $or: [{ logo: { $exists: true } }, { profileImage: { $exists: true } }]
     });
-    this.logger.log(`Companies with logo/profileImage: ${companiesWithImages}`);
+    this.logger.debug(`Companies with logo/profileImage: ${companiesWithImages}`);
 
     // Get companies with external logos updated in last 24h
     const companies = await client.db().collection('companies').find({
@@ -73,7 +73,7 @@ export class ImageLocalizationService {
       ]
     }).toArray();
 
-    this.logger.log(`Found ${companies.length} companies to process`);
+    this.logger.debug(`Found ${companies.length} companies to process`);
 
     let success = 0, failed = 0;
 
@@ -108,20 +108,20 @@ export class ImageLocalizationService {
     await this.logJob('COMPANY_LOGOS', success, failed);
   }
 
-  @Cron('*/30 * * * * *') //@Cron('0 15 2 * * *') // Daily at 2:15 AM
+  @Cron('*/20 * * * * *') //@Cron('0 15 2 * * *') // Daily at 2:15 AM
   async handleContactAvatars() {
     const client = new MongoClient(process.env.MONGO_URI_USER || '');
     await client.connect();
 
     // Debug: Check total contacts
     const totalContacts = await client.db().collection('contacts').countDocuments();
-    this.logger.log(`Total contacts in DB: ${totalContacts}`);
+    this.logger.debug(`Total contacts in DB: ${totalContacts}`);
 
     // Debug: Check contacts with avatars
     const contactsWithAvatars = await client.db().collection('contacts').countDocuments({
       avatar: { $exists: true }
     });
-    this.logger.log(`Contacts with avatars: ${contactsWithAvatars}`);
+    this.logger.debug(`Contacts with avatars: ${contactsWithAvatars}`);
 
     // Get contacts with external avatars updated in last 24h
     const contacts = await client.db().collection('contacts').find({
@@ -129,7 +129,7 @@ export class ImageLocalizationService {
       avatar: /^https?:\/\//
     }).toArray();
 
-    this.logger.log(`Found ${contacts.length} contacts to process`);
+    this.logger.debug(`Found ${contacts.length} contacts to process`);
 
     let success = 0, failed = 0;
 
