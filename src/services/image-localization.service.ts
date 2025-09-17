@@ -73,7 +73,7 @@ export class ImageLocalizationService {
       ]
     }).toArray();
 
-    this.logger.debug(`Found ${companies.length} companies to process`);
+    this.logger.log(`Found ${companies.length} companies to process`);
 
     let success = 0, failed = 0;
 
@@ -129,7 +129,7 @@ export class ImageLocalizationService {
       avatar: /^https?:\/\//
     }).toArray();
 
-    this.logger.debug(`Found ${contacts.length} contacts to process`);
+    this.logger.log(`Found ${contacts.length} contacts to process`);
 
     let success = 0, failed = 0;
 
